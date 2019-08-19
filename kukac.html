@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+    <meta charset="utf-8">
+  <title>Teste Kukac</title>
+  <base href="/">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <div class="container" align="center" style="margin-top: 150px;">
+  <div class="row">
+    <div class="col-md-5">
+<h1 class="display-4">Teste</h1>
+
+<form  autocomplete="off"  (submit)="onSubmit(form)">
+ 
+  <div class="form-group">
+    <input id="renda"   class="form-control" placeholder="Digite sua renda:" required>
+  </div>
+   <div class="form-group">
+    <input id="dependentes" class="form-control" placeholder="Digite seus dependentes:" required >
+  </div>
+     <div class="form-group">
+    <input id="dgnome"  class="form-control" placeholder="Digite seu nome:" required >
+  </div>
+  <div class="form-group">
+    <input id="cep"  class="form-control" placeholder="Digite seu cep:" required >
+  </div>
+  <div class="form-group"> 
+<button type="button" class="btn btn-outline-primary btn-lg btn-block" onclick="calcular()">Teste</button></div>
+</div>
+</div>
+</div>
+
+
+
+ <div class="container" align="center" style="margin-left: 700px; margin-top: -350px;">
+  <div class="row">
+    <div class="col-md-5">
+<h1 class="display-4">Resultado</h1>
+
+<form  autocomplete="off"  (submit)="onSubmit(form)">
+  <div class="form-group">
+    <input id="nome" class="form-control" placeholder="Seu nome aparecerá aqui." required disabled>
+  </div>
+  <div class="form-group">
+    <input id="rua" class="form-control" placeholder="Sua rua aparecerá aqui." required disabled>
+  </div> 
+  <div class="form-group">
+    <input id="bairro"  class="form-control" placeholder="Seu bairro aparecerá aqui." required disabled>
+  </div>
+   <div class="form-group">
+    <input id="cidade" class="form-control" placeholder="Sua cidade aparecerá aqui." required disabled>
+  </div>
+     <div class="form-group">
+    <input id="uf" class="form-control" placeholder="Seu estado aparecerá aqui." required disabled>
+  </div>
+  <div class="form-group">
+    <input id="percapita" class="form-control" placeholder="Sua renda per capita aparecerá aqui." required disabled>
+  </div>
+</div>
+</div>
+</div>
+  <script>
+    function calcular(){
+        var s1 = document.getElementById("renda").value;
+        var s2 = document.getElementById("dependentes").value;
+        var s3 = s1/s2;
+       $("#percapita").val(s3);
+     }
+    
+
+$(document).ready(function (){
+ 
+ $("#cep").mask("99.999-999");
+ 
+ 
+ $('#cep').change(function(){
+ 
+            var cep = $(this).val().replace(/\D/g, ''); 
+ $.getJSON("https://viacep.com.br/ws/"+ cep + "/json/", function(dados){
+ 
+
+ 
+ if (!("erro" in dados)){
+ $("#rua").val(dados.logradouro);
+ $("#bairro").val(dados.bairro);
+ $("#cidade").val(dados.localidade);
+ $("#uf").val(dados.uf);
+ $("#nome").val(dgnome.value);
+ 
+ 
+ }
+ 
+ });
+ 
+  });
+  
+   });
+  
+</script>
+</form>
